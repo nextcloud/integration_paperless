@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9458ec4e7188a04352a5009b92d208f6",
+    "content-hash": "6fe17bc7bfe4f6466af3dfad338ea9ae",
     "packages": [
         {
             "name": "nextcloud/coding-standard",
