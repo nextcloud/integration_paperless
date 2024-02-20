@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>integration_paperless</id>
+	<name>Paperless</name>
+	<summary>Integration with the Paperless Document Management System</summary>
+	<description>TODO</description>
+	<version>1.0.0</version>
+	<licence>agpl</licence>
+	<author>Kate Döen</author>
+	<namespace>Paperless</namespace>
+	<category>integration</category>
+	<bugs>https://github.com/nextcloud/integration_paperless/issues</bugs>
+	<dependencies>
+		<nextcloud min-version="26" max-version="29"/>
+	</dependencies>
+	<settings>
+		<personal>OCA\Paperless\Settings\Settings</personal>
+		<personal-section>OCA\Paperless\Settings\SettingsSection</personal-section>
+	</settings>
+</info>

@@ -1,0 +1,15 @@
+version: "3.4"
+services:
+  broker:
+    image: redis:7
+
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    depends_on:
+      - broker
+    ports:
+      - "8000:8000"
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_ADMIN_USER: admin
+      PAPERLESS_ADMIN_PASSWORD: admin
