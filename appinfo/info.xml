@@ -4,7 +4,12 @@
 	<id>integration_paperless</id>
 	<name>Paperless</name>
 	<summary>Integration with the Paperless Document Management System</summary>
-	<description>TODO</description>
+	<description><![CDATA[
+This integration adds a file action menu item that can be used to uploda files to a Paperless instance.
+
+Paperless is an open source document management system (DMS) designed for archiving and retrieving your digital documents.
+]]>
+	</description>
 	<version>1.0.0</version>
 	<licence>agpl</licence>
 	<author>Kate Döen</author>

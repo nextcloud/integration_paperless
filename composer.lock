@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fe17bc7bfe4f6466af3dfad338ea9ae",
+    "content-hash": "9458ec4e7188a04352a5009b92d208f6",
     "packages": [
         {
             "name": "nextcloud/coding-standard",
@@ -49,16 +49,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.49.0",
+            "version": "v3.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "f7d3219cac46632f12362c9aa7c2ac0d2fe92c52"
+                "reference": "8f741bccc45ef07e046040d136da37be720531a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/f7d3219cac46632f12362c9aa7c2ac0d2fe92c52",
-                "reference": "f7d3219cac46632f12362c9aa7c2ac0d2fe92c52",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/8f741bccc45ef07e046040d136da37be720531a8",
+                "reference": "8f741bccc45ef07e046040d136da37be720531a8",
                 "shasum": ""
             },
             "require": {
@@ -95,9 +95,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.49.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.50.0"
             },
-            "time": "2024-02-02T00:42:09+00:00"
+            "time": "2024-02-23T23:18:17+00:00"
         }
     ],
     "packages-dev": [
@@ -164,12 +164,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextcloud-deps/ocp.git",
-                "reference": "ecc412f29a227848dd101912ec925fdc5fa214d7"
+                "reference": "d1cf95fdadf4fdc9bc8fa693d0e7e2943fca5e72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextcloud-deps/ocp/zipball/ecc412f29a227848dd101912ec925fdc5fa214d7",
-                "reference": "ecc412f29a227848dd101912ec925fdc5fa214d7",
+                "url": "https://api.github.com/repos/nextcloud-deps/ocp/zipball/d1cf95fdadf4fdc9bc8fa693d0e7e2943fca5e72",
+                "reference": "d1cf95fdadf4fdc9bc8fa693d0e7e2943fca5e72",
                 "shasum": ""
             },
             "require": {
@@ -201,7 +201,7 @@
                 "issues": "https://github.com/nextcloud-deps/ocp/issues",
                 "source": "https://github.com/nextcloud-deps/ocp/tree/master"
             },
-            "time": "2024-02-17T00:31:36+00:00"
+            "time": "2024-02-24T00:30:01+00:00"
         },
         {
             "name": "psr/clock",
