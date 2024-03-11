@@ -18,7 +18,8 @@ jobs:
       # do not stop on another job's failure
       fail-fast: false
       matrix:
-        ocp-version: [ 'dev-master' ]
+        # The app supports 26+, but psalm can only run against 28+
+        ocp-version: [ 'dev-stable28', 'dev-master' ]
 
     name: static-psalm-analysis ${{ matrix.ocp-version }}
     steps:
