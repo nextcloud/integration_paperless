@@ -1,19 +1,19 @@
 {
-    "name": "nextcloud/integration_paperless",
-    "license": "AGPL-3.0",
+	"name": "nextcloud/integration_paperless",
+	"license": "AGPL-3.0",
 	"autoload": {
 		"psr-4": {
 			"OCA\\Paperless\\": "lib/"
 		}
 	},
-    "require": {
-        "php": "^8.0",
-        "nextcloud/coding-standard": "^1.2",
+	"require": {
+		"php": "^8.0",
+		"nextcloud/coding-standard": "^1.2",
 		"bamarni/composer-bin-plugin": "^1.8"
 	},
-    "require-dev": {
-        "nextcloud/ocp": "dev-master"
-    },
+	"require-dev": {
+		"nextcloud/ocp": "dev-master"
+	},
 	"scripts": {
 		"post-install-cmd": [
 			"@composer bin all install --ansi"
@@ -26,9 +26,9 @@
 		"cs:fix": "php-cs-fixer fix",
 		"psalm": "psalm --threads=$(nproc --all) --no-cache"
 	},
-    "config": {
-        "allow-plugins": {
-            "bamarni/composer-bin-plugin": true
-        }
-    }
+	"config": {
+		"allow-plugins": {
+			"bamarni/composer-bin-plugin": true
+		}
+	}
 }
