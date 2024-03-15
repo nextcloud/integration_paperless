@@ -1,6 +1,7 @@
 # Paperless Integration
 
-Integration with the [Paperless](https://docs.paperless-ngx.com) Document Management System.
+Integration with the [Paperless](https://docs.paperless-ngx.com) Document Management System.  
+It adds a file action menu item that can be used to upload a file from your Nextcloud Files to Paperless.
 
 ## **🛠️ State of maintenance**
 

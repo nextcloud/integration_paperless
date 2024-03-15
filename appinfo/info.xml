@@ -5,9 +5,8 @@
 	<name>Paperless</name>
 	<summary>Integration with the Paperless Document Management System</summary>
 	<description><![CDATA[
-This integration adds a file action menu item that can be used to uploda files to a Paperless instance.
-
-Paperless is an open source document management system (DMS) designed for archiving and retrieving your digital documents.
+Integration with the [Paperless](https://docs.paperless-ngx.com) Document Management System.
+It adds a file action menu item that can be used to upload a file from your Nextcloud Files to Paperless.
 ]]>
 	</description>
 	<version>1.0.0</version>
