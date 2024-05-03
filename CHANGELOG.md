@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add screenshot for Appstore
+
 ## [1.0.1] - 2024-03-15
 
 ### Added
