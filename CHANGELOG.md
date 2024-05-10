@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2024-05-10
+
 ### Changed
 
 - Set minimum Nextcloud version to 28 due to incompatibilities
