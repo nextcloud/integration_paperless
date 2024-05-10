@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57eda04f8a71d934273b1fd3bc9c78e6",
+    "content-hash": "81fce2c154056aa153fb7f47dd8a5301",
     "packages": [
         {
             "name": "bamarni/composer-bin-plugin",
@@ -106,16 +106,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.51.0",
+            "version": "v3.56.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "a792394f7f3934f75a4df9dca544796c6f503027"
+                "reference": "a0ae562ea8ec4ae831a404bb67ba9af248fde530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/a792394f7f3934f75a4df9dca544796c6f503027",
-                "reference": "a792394f7f3934f75a4df9dca544796c6f503027",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/a0ae562ea8ec4ae831a404bb67ba9af248fde530",
+                "reference": "a0ae562ea8ec4ae831a404bb67ba9af248fde530",
                 "shasum": ""
             },
             "require": {
@@ -152,24 +152,24 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.51.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.56.0"
             },
-            "time": "2024-02-28T19:51:07+00:00"
+            "time": "2024-05-07T15:50:26+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "nextcloud/ocp",
-            "version": "dev-master",
+            "version": "dev-stable28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextcloud-deps/ocp.git",
-                "reference": "d23dac5fbce5d4eb53696da612285f4cbb666c90"
+                "reference": "8c3209a00e424f1ddcdfff15cb80081373210681"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextcloud-deps/ocp/zipball/d23dac5fbce5d4eb53696da612285f4cbb666c90",
-                "reference": "d23dac5fbce5d4eb53696da612285f4cbb666c90",
+                "url": "https://api.github.com/repos/nextcloud-deps/ocp/zipball/8c3209a00e424f1ddcdfff15cb80081373210681",
+                "reference": "8c3209a00e424f1ddcdfff15cb80081373210681",
                 "shasum": ""
             },
             "require": {
@@ -179,11 +179,10 @@
                 "psr/event-dispatcher": "^1.0",
                 "psr/log": "^1.1.4"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "29.0.0-dev"
+                    "dev-stable28": "28.0.0-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -199,9 +198,9 @@
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
             "support": {
                 "issues": "https://github.com/nextcloud-deps/ocp/issues",
-                "source": "https://github.com/nextcloud-deps/ocp/tree/master"
+                "source": "https://github.com/nextcloud-deps/ocp/tree/stable28"
             },
-            "time": "2024-03-09T00:30:46+00:00"
+            "time": "2024-05-09T00:34:08+00:00"
         },
         {
             "name": "psr/clock",
@@ -416,5 +415,8 @@
         "php": "^8.0"
     },
     "platform-dev": [],
+    "platform-overrides": {
+        "php": "8.0"
+    },
     "plugin-api-version": "2.6.0"
 }
