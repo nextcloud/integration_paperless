@@ -9,7 +9,7 @@ Integration with the [Paperless](https://docs.paperless-ngx.com) Document Manage
 It adds a file action menu item that can be used to upload a file from your Nextcloud Files to Paperless.
 ]]>
 	</description>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<licence>agpl</licence>
 	<author>Kate Döen</author>
 	<namespace>Paperless</namespace>
@@ -17,7 +17,7 @@ It adds a file action menu item that can be used to upload a file from your Next
 	<bugs>https://github.com/nextcloud/integration_paperless/issues</bugs>
 	<screenshot>https://raw.githubusercontent.com/nextcloud/integration_paperless/main/img/screenshot.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="28" max-version="29"/>
+		<nextcloud min-version="28" max-version="30"/>
 	</dependencies>
 	<settings>
 		<personal>OCA\Paperless\Settings\Settings</personal>
