@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OCA\Paperless\AppInfo;
 
 use OCA\Paperless\Listener\FileActionListener;
+use OCA\Paperless\Search\SearchProvider;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -21,6 +22,7 @@ class Application extends App implements IBootstrap {
 
 	public function register(IRegistrationContext $context): void {
 		$context->registerEventListener(LoadAdditionalScriptsEvent::class, FileActionListener::class);
+		$context->registerSearchProvider(SearchProvider::class);
 	}
 
 	public function boot(IBootContext $context): void {

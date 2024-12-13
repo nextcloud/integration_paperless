@@ -21,6 +21,7 @@ class ApiService {
 	public function __construct(
 		private string $userId,
 		private IRootFolder $root,
+		private NetworkService $networkService,
 		ConfigService $configService,
 		IClientService $clientService,
 	) {
@@ -66,5 +67,26 @@ class ApiService {
 				),
 			],
 		);
+	}
+
+	public function searchMessages(string $userId, string $term, int $offset = 0, int $limit = 10): array {
+		// Search API use Advanced Search, so asterik is needed behind and after query
+		$result = $this->request($userId, 'documents', [
+			'format' => 'json',
+			'query' => '*' . $term . '*' ,
+		]);
+
+		if (isset($result['error'])) {
+			return (array) $result;
+		}
+
+		// Sort by most recent
+		// $messages = array_reverse($result['document'] ?? []);
+		return array_slice($result, $offset, $limit);
+	}
+
+	public function request(string $userId, string $endPoint, array $params = [], string $method = 'GET',
+		bool $jsonResponse = true, bool $paperlessApiRequest = true) {
+		return $this->networkService->request($userId, $endPoint, $params, $method, $jsonResponse, $paperlessApiRequest);
 	}
 }
