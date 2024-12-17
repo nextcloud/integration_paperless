@@ -1,20 +1,31 @@
 <?php
 
+/**
+ * This file contains code derived from Nextcloud - Zulip
+ *
+ * This file is licensed under the Affero General Public License version 3 or
+ * later. See the COPYING file.
+ *
+ * @author Julien Veyssier <julien-nc@posteo.net>
+ * @author Anupam Kumar <kyteinsky@gmail.com>
+ * @author Edward Ly <contact@edward.ly>
+ * @copyright Julien Veyssier 2022
+ * @copyright Anupam Kumar 2023
+ * @copyright Edward Ly 2024
+ */
+
 declare(strict_types=1);
 
 namespace OCA\Paperless\Service;
 
 use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
-use GuzzleHttp\Client;
 use OCA\Paperless\AppInfo\Application;
-use OCP\Files\File;
-use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\IL10N;
-use OCP\PreConditionNotMetException;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -30,7 +41,7 @@ class NetworkService {
 		IClientService $clientService,
 		private LoggerInterface $logger,
 		private ConfigService $configService,
-		private IL10N $l10n
+		private IL10N $l10n,
 	) {
 		$this->client = new Client();
 	}
@@ -84,11 +95,11 @@ class NetworkService {
 				return json_decode($body, true);
 			}
 			return $body;
-		} catch (ServerException | ClientException $e) {
+		} catch (ServerException|ClientException $e) {
 			$body = $e->getResponse()->getBody();
 			$this->logger->warning('Paperless API error : ' . $body, ['app' => Application::APP_ID]);
 			return ['error' => $e->getMessage()];
-		} catch (Exception | Throwable $e) {
+		} catch (Exception|Throwable $e) {
 			$this->logger->warning('Paperless API error', ['exception' => $e, 'app' => Application::APP_ID]);
 			return ['error' => $e->getMessage()];
 		}
