@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains code derived from Nextcloud - Zulip
  * @copyright Copyright (c) 2024, Edward Ly

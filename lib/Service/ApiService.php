@@ -26,6 +26,7 @@ use OCP\Files\IRootFolder;
 use OCP\Files\NotPermittedException;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
+use Psr\Log\LoggerInterface;
 
 class ApiService {
 	private IClient $client;
@@ -35,9 +36,9 @@ class ApiService {
 	public function __construct(
 		private string $userId,
 		private IRootFolder $root,
-		private NetworkService $networkService,
 		ConfigService $configService,
 		IClientService $clientService,
+		private LoggerInterface $logger,
 	) {
 		$this->client = $clientService->newClient();
 		$this->config = $configService->getConfig();
@@ -84,23 +85,33 @@ class ApiService {
 	}
 
 	public function searchMessages(string $userId, string $term, int $offset = 0, int $limit = 10): array {
-		// Search API use Advanced Search, so asterik is needed behind and after query
-		$result = $this->request($userId, 'documents', [
+		$arguments = [
 			'format' => 'json',
 			'query' => '*' . $term . '*' ,
-		]);
+		];
 
-		if (isset($result['error'])) {
-			return (array)$result;
+		$paperlessURL = rtrim($this->config->url, '/') . '/api/documents/?' . http_build_query($arguments);
+		$result = $this->client->get($paperlessURL,
+			[
+				'headers' => array_merge(
+					$this->getAuthorizationHeaders(),
+					[
+						'Content-Type' => 'application/json',
+						'Accept' => 'application/json'
+					]
+				)
+			]
+		);
+
+		$body = $result->getBody();
+		$json_body = json_decode($body, true);
+
+		if (isset($json_body['error'])) {
+			return (array)$json_body;
 		}
 
 		// Sort by most recent
-		// $messages = array_reverse($result['document'] ?? []);
-		return array_slice($result, $offset, $limit);
-	}
-
-	public function request(string $userId, string $endPoint, array $params = [], string $method = 'GET',
-		bool $jsonResponse = true, bool $paperlessApiRequest = true) {
-		return $this->networkService->request($userId, $endPoint, $params, $method, $jsonResponse, $paperlessApiRequest);
+		// $messages = array_reverse($json_body['document'] ?? []);
+		return array_slice($json_body, $offset, $limit);
 	}
 }
