@@ -26,7 +26,6 @@ use OCP\Files\IRootFolder;
 use OCP\Files\NotPermittedException;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
-use Psr\Log\LoggerInterface;
 
 class ApiService {
 	private IClient $client;
@@ -38,7 +37,6 @@ class ApiService {
 		private IRootFolder $root,
 		ConfigService $configService,
 		IClientService $clientService,
-		private LoggerInterface $logger,
 	) {
 		$this->client = $clientService->newClient();
 		$this->config = $configService->getConfig();

@@ -66,7 +66,7 @@ class SearchProvider implements IProvider {
 	}
 
 	public function getOrder(string $route, array $routeParameters): int {
-		return 20; // Adjust priority as needed
+		return 30; // Adjust priority as needed
 	}
 
 	public function search(IUser $user, ISearchQuery $query): SearchResult {
@@ -74,10 +74,11 @@ class SearchProvider implements IProvider {
 			return SearchResult::complete($this->getName(), []);
 		}
 
+		$offset = ($query->getCursor() ?? 0);
 		$limit = $query->getLimit();
+
 		$term = $query->getTerm();
-		$offset = $query->getCursor();
-		$offset = $offset ? intval($offset) : 0;
+		$this->logger->warning('Debug second offset :', ['offset' => $offset]);
 
 		$url = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'url');
 		$apiKey = $this->configService->getConfig($user->getUID(), 'token');
@@ -94,7 +95,7 @@ class SearchProvider implements IProvider {
 
 		$dataEntries = $searchResult['results'] ?? [];
 		$formattedResults = array_map(function (array $entry) use ($url): SearchResultEntry {
-			$finalThumbnailUrl = $this->getThumbnailUrl($entry);
+			$finalThumbnailUrl = '';
 			$title = $entry['title'] ?? 'Untitled';
 			$context = $entry['__search_hit__']['highlights'] ?? '';
 			$link = $this->getLinkToPaperless($entry, $url);
@@ -103,7 +104,7 @@ class SearchProvider implements IProvider {
 				$title,
 				strip_tags($context),
 				$link,
-				$finalThumbnailUrl === '' ? 'icon-paperless-search-fallback' : '',
+				$finalThumbnailUrl,
 				true
 			);
 		}, $dataEntries);
@@ -111,7 +112,8 @@ class SearchProvider implements IProvider {
 		return SearchResult::paginated(
 			$this->getName(),
 			$formattedResults,
-			$offset + count($dataEntries)
+			$offset + $limit
+			// $offset + count($dataEntries)
 		);
 	}
 
@@ -122,13 +124,5 @@ class SearchProvider implements IProvider {
 	 */
 	protected function getLinkToPaperless(array $entry, string $url): string {
 		return rtrim($url, '/') . '/documents/' . ($entry['id'] ?? '#');
-	}
-
-	/**
-	 * @param array $entry
-	 * @return string
-	 */
-	protected function getThumbnailUrl(array $entry): string {
-		return '';
 	}
 }
