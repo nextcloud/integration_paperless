@@ -94,12 +94,12 @@ class SearchProvider implements IProvider {
                 $formattedResults = array_map(function (array $entry) use ($url): SearchResultEntry {
                         $finalThumbnailUrl = '';
                         $title = $entry['title'] ?? 'Untitled';
-                        $context = $entry['__search_hit__']['highlights'] ?? '';
+                        $context = strip_tags($entry['__search_hit__']['highlights'] ?? '');
                         $link = $this->getLinkToPaperless($entry, $url);
                         return new SearchResultEntry(
                                 $finalThumbnailUrl,
                                 $title,
-                                strip_tags($context),
+                                $context,
                                 $link,
                                 $finalThumbnailUrl,
                                 true
