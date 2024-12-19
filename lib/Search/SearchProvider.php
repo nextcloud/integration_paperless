@@ -84,7 +84,7 @@ class SearchProvider implements IProvider {
 
                 $searchResult = $this->apiService->searchMessages($user->getUID(), $term);
 
-                if (isset($searchResult['error'])) {
+		if (isset($searchResult['html'])) {
                         return SearchResult::paginated($this->getName(), [], 0);
                 }
 
