@@ -82,7 +82,7 @@ class ApiService {
 		);
 	}
 
-	public function searchMessages(string $userId, string $term, int $offset = 0, int $limit = 10): array {
+	public function searchMessages(string $userId, string $term, int $offset = 0, int $limit = 5): array {
 		$arguments = [
 			'format' => 'json',
 			'query' => '*' . $term . '*' ,
@@ -109,7 +109,7 @@ class ApiService {
 		}
 
 		// Sort by most recent
-		// $messages = array_reverse($json_body['document'] ?? []);
-		return array_slice($json_body, $offset, $limit);
+		$messages = array_reverse($json_body ?? []);
+		return array_slice($messages, $offset, $limit);
 	}
 }
