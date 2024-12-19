@@ -91,6 +91,6 @@ class ApiService {
 		$body = $result->getBody();
 		$json_body = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
-		return array_slice($json_body, $offset, $limit);
+		return $json_body;
 	}
 }

@@ -69,7 +69,7 @@ class SearchProvider implements IProvider {
 		return 30; // Adjust priority as needed
 	}
 
-	public function search(IUser $user, ISearchQuery $query, $page = 1, $resultsPerPage = 5): SearchResult {
+	public function search(IUser $user, ISearchQuery $query): SearchResult {
 		$offset = ($query->getCursor() ?? 0);
 		$limit = $query->getLimit();
 
@@ -82,13 +82,14 @@ class SearchProvider implements IProvider {
 			return SearchResult::paginated($this->getName(), [], 0);
 		}
 
-		$searchResult = $this->apiService->searchMessages($user->getUID(), $term);
+		$searchResult = $this->apiService->searchDocuments($user->getUID(), $term);
 
 		if (isset($searchResult['html'])) {
 			return SearchResult::paginated($this->getName(), [], 0);
 		}
 
 		// Paginate the results manually since the API does not provide offset/limit
+		$this->logger->warning('Debug searchResult:', ['searchResult' => $searchResult]);
 		$pagedResults = array_slice($searchResult['results'], $offset, $limit);
 
 		$formattedResults = array_map(function (array $entry) use ($url): SearchResultEntry {
