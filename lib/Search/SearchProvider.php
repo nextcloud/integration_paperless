@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2024, Edward Ly
  *
  * @author Edward Ly <contact@edward.ly>
- *
+ * @author Goh Jin Di <jdgoh334@gmail.com>
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
