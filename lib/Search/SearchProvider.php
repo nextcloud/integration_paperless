@@ -44,81 +44,81 @@ use Psr\Log\LoggerInterface;
 
 class SearchProvider implements IProvider {
 
-        public function __construct(
-                private LoggerInterface $logger,
-                private IAppManager $appManager,
-                private IL10N $l10n,
-                private IConfig $config,
-                private IURLGenerator $urlGenerator,
-                private IDateTimeFormatter $dateTimeFormatter,
-                private IDateTimeZone $dateTimeZone,
-                private ConfigService $configService,
-                private ApiService $apiService,
-        ) {
-        }
+	public function __construct(
+		private LoggerInterface $logger,
+		private IAppManager $appManager,
+		private IL10N $l10n,
+		private IConfig $config,
+		private IURLGenerator $urlGenerator,
+		private IDateTimeFormatter $dateTimeFormatter,
+		private IDateTimeZone $dateTimeZone,
+		private ConfigService $configService,
+		private ApiService $apiService,
+	) {
+	}
 
-        public function getId(): string {
-                return 'paperless-search-documents';
-        }
+	public function getId(): string {
+		return 'paperless-search-documents';
+	}
 
-        public function getName(): string {
-                return $this->l10n->t('Paperless document search result');
-        }
+	public function getName(): string {
+		return $this->l10n->t('Paperless document search result');
+	}
 
-        public function getOrder(string $route, array $routeParameters): int {
-                return 30; // Adjust priority as needed
-        }
+	public function getOrder(string $route, array $routeParameters): int {
+		return 30; // Adjust priority as needed
+	}
 
-        public function search(IUser $user, ISearchQuery $query, $page = 1, $resultsPerPage = 5): SearchResult {
-                $offset = ($query->getCursor() ?? 0);
-                $limit = $query->getLimit();
+	public function search(IUser $user, ISearchQuery $query, $page = 1, $resultsPerPage = 5): SearchResult {
+		$offset = ($query->getCursor() ?? 0);
+		$limit = $query->getLimit();
 
-                $term = $query->getTerm();
+		$term = $query->getTerm();
 
-                $url = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'url');
-                $apiKey = $this->configService->getConfig($user->getUID(), 'token');
+		$url = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'url');
+		$apiKey = $this->configService->getConfig($user->getUID(), 'token');
 
-                if ($url === '' || $apiKey === '') {
-                        return SearchResult::paginated($this->getName(), [], 0);
-                }
+		if ($url === '' || $apiKey === '') {
+			return SearchResult::paginated($this->getName(), [], 0);
+		}
 
-                $searchResult = $this->apiService->searchMessages($user->getUID(), $term);
+		$searchResult = $this->apiService->searchMessages($user->getUID(), $term);
 
 		if (isset($searchResult['html'])) {
-                        return SearchResult::paginated($this->getName(), [], 0);
-                }
+			return SearchResult::paginated($this->getName(), [], 0);
+		}
 
-                // Paginate the results manually since the API does not provide offset/limit
-                $pagedResults = array_slice($searchResult['results'], $offset, $limit);
+		// Paginate the results manually since the API does not provide offset/limit
+		$pagedResults = array_slice($searchResult['results'], $offset, $limit);
 
-                $formattedResults = array_map(function (array $entry) use ($url): SearchResultEntry {
-                        $finalThumbnailUrl = '';
-                        $title = $entry['title'] ?? 'Untitled';
-                        $context = strip_tags($entry['__search_hit__']['highlights'] ?? '');
-                        $link = $this->getLinkToPaperless($entry, $url);
-                        return new SearchResultEntry(
-                                $finalThumbnailUrl,
-                                $title,
-                                $context,
-                                $link,
-                                $finalThumbnailUrl,
-                                true
-                        );
-                }, $pagedResults);
+		$formattedResults = array_map(function (array $entry) use ($url): SearchResultEntry {
+			$finalThumbnailUrl = '';
+			$title = $entry['title'] ?? 'Untitled';
+			$context = strip_tags($entry['__search_hit__']['highlights'] ?? '');
+			$link = $this->getLinkToPaperless($entry, $url);
+			return new SearchResultEntry(
+				$finalThumbnailUrl,
+				$title,
+				$context,
+				$link,
+				$finalThumbnailUrl,
+				true
+			);
+		}, $pagedResults);
 
-                return SearchResult::paginated(
-                        $this->getName(),
-                        $formattedResults,
-                        $offset + $limit
-                );
-        }
+		return SearchResult::paginated(
+			$this->getName(),
+			$formattedResults,
+			$offset + $limit
+		);
+	}
 
-        /**
-         * @param array $entry
-         * @param string $url
-         * @return string
-         */
-        protected function getLinkToPaperless(array $entry, string $url): string {
-                return rtrim($url, '/') . '/documents/' . ($entry['id'] ?? '#');
-        }
+	/**
+	 * @param array $entry
+	 * @param string $url
+	 * @return string
+	 */
+	protected function getLinkToPaperless(array $entry, string $url): string {
+		return rtrim($url, '/') . '/documents/' . ($entry['id'] ?? '#');
+	}
 }
