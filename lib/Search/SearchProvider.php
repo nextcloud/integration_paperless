@@ -58,7 +58,7 @@ class SearchProvider implements IProvider {
         }
 
         public function getId(): string {
-                return 'paperless-search-messages';
+                return 'paperless-search-documents';
         }
 
         public function getName(): string {
