@@ -26,6 +26,7 @@ use OCP\Files\IRootFolder;
 use OCP\Files\NotPermittedException;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
+use Psr\Log\LoggerInterface;
 
 class ApiService {
 	private IClient $client;
@@ -37,6 +38,7 @@ class ApiService {
 		private IRootFolder $root,
 		ConfigService $configService,
 		IClientService $clientService,
+		private LoggerInterface $logger,
 	) {
 		$this->client = $clientService->newClient();
 		$this->config = $configService->getConfig();
@@ -103,12 +105,6 @@ class ApiService {
 		$body = $result->getBody();
 		$json_body = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
-		if (isset($json_body['error'])) {
-			return (array)$json_body;
-		}
-
-		// Sort by most recent
-		$messages = array_reverse($json_body ?? []);
-		return array_slice($messages, $offset, $limit);
+		return array_slice($json_body, $offset, $limit);
 	}
 }
