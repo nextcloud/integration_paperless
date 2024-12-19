@@ -94,7 +94,6 @@ class ApiService {
 				'headers' => array_merge(
 					$this->getAuthorizationHeaders(),
 					[
-						'Content-Type' => 'application/json',
 						'Accept' => 'application/json'
 					]
 				)
