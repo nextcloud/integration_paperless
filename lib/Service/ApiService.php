@@ -70,7 +70,7 @@ class ApiService {
 		);
 	}
 
-	public function searchMessages(string $userId, string $term, int $offset = 0, int $limit = 5): array {
+	public function searchDocuments(string $userId, string $term): array {
 		$arguments = [
 			'format' => 'json',
 			'query' => '*' . $term . '*' ,
