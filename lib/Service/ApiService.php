@@ -94,7 +94,6 @@ class ApiService {
 				'headers' => array_merge(
 					$this->getAuthorizationHeaders(),
 					[
-						'Content-Type' => 'application/json',
 						'Accept' => 'application/json'
 					]
 				)
@@ -102,7 +101,7 @@ class ApiService {
 		);
 
 		$body = $result->getBody();
-		$json_body = json_decode($body, true);
+		$json_body = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
 		if (isset($json_body['error'])) {
 			return (array)$json_body;
