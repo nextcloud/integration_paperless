@@ -62,7 +62,7 @@ class SearchProvider implements IProvider {
         }
 
         public function getName(): string {
-                return $this->l10n->t('Paperless Search Result');
+                return $this->l10n->t('Paperless document search result');
         }
 
         public function getOrder(string $route, array $routeParameters): int {
