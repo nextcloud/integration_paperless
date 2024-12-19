@@ -12,6 +12,7 @@ use OCP\Files\IRootFolder;
 use OCP\Files\NotPermittedException;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
+use Psr\Log\LoggerInterface;
 
 class ApiService {
 	private IClient $client;
@@ -23,6 +24,7 @@ class ApiService {
 		private IRootFolder $root,
 		ConfigService $configService,
 		IClientService $clientService,
+		private LoggerInterface $logger,
 	) {
 		$this->client = $clientService->newClient();
 		$this->config = $configService->getConfig();
@@ -66,5 +68,29 @@ class ApiService {
 				),
 			],
 		);
+	}
+
+	public function searchDocuments(string $userId, string $term): array {
+		$arguments = [
+			'format' => 'json',
+			'query' => '*' . $term . '*' ,
+		];
+
+		$paperlessURL = rtrim($this->config->url, '/') . '/api/documents/?' . http_build_query($arguments);
+		$result = $this->client->get($paperlessURL,
+			[
+				'headers' => array_merge(
+					$this->getAuthorizationHeaders(),
+					[
+						'Accept' => 'application/json'
+					]
+				)
+			]
+		);
+
+		$body = $result->getBody();
+		$json_body = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+
+		return $json_body;
 	}
 }
