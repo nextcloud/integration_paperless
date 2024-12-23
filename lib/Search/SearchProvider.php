@@ -71,9 +71,7 @@ class SearchProvider implements IProvider {
 
 	public function search(IUser $user, ISearchQuery $query): SearchResult {
 		$offset = ($query->getCursor() ?? 0);
-		$this->logger->warning('Debug offset: ', ['offset'=>$offset]);
 		$limit = $query->getLimit();
-		$this->logger->warning('Debug limit: ', ['limit'=>$limit]);
 
 		$term = $query->getTerm();
 		$url = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'url');
@@ -88,10 +86,6 @@ class SearchProvider implements IProvider {
 		if (isset($searchResult['html'])) {
 			return SearchResult::paginated($this->getName(), [], 0);
 		}
-
-		// $this->logger->warning('Debug searchResult' ,['searchResult' => $searchResult]);
-		// Paginate the results manually since the API does not provide offset/limit
-		// $pagedResults = array_slice($searchResult, $offset, $limit);
 
 		$formattedResults = array_map(function (array $entry) use ($url): SearchResultEntry {
 			$finalThumbnailUrl = '';
