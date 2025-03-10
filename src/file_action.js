@@ -21,6 +21,7 @@ registerFileAction(
 			return t('integration_paperless', 'Upload to Paperless')
 		},
 		iconSvgInline: () => PaperlessLogo,
+		enabled: () => true,
 		exec: async (file) => {
 			return await uploadFile(file)
 		},
