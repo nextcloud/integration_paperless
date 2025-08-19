@@ -17,7 +17,7 @@ It adds a file action menu item that can be used to upload a file from your Next
 	<bugs>https://github.com/nextcloud/integration_paperless/issues</bugs>
 	<screenshot>https://raw.githubusercontent.com/nextcloud/integration_paperless/main/img/screenshot.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="28" max-version="31"/>
+		<nextcloud min-version="28" max-version="32"/>
 	</dependencies>
 	<settings>
 		<personal>OCA\Paperless\Settings\Settings</personal>
