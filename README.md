@@ -18,7 +18,6 @@ If there is a strong business case for any development of this app, we will cons
 
 ## Development
 
-Set `allow_local_remote_servers` to `true` (boolean) in your config.php.  
 The Paperless server will run on `http://localhost:8000` with username `admin` and password `admin`:
 ```bash
 docker compose up
