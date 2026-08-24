@@ -68,6 +68,9 @@ class ApiService {
 						'contents' => $file->getName(),
 					],
 				],
+				'nextcloud' => [
+					'allow_local_address' => true,
+				],
 			],
 		);
 	}
